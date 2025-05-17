@@ -7,7 +7,7 @@ import shutil
 # all users
 U = set([f"{i:02d}" for i in range(1, 32)])
 # all actions
-A = set([f"{i:02d}" for i in range(1, 49)])
+A = set([f"{i:02d}" for i in range(1, 56)]) - set([f"{i:02d}" for i in range(16, 23)])
 
 # the path to the data
 DATA_ROOT = "F:\\dataset\\xrf55_for_siamid"
@@ -52,14 +52,75 @@ def copy_files_based_on_conditions(input_paths, output_train, output_test, user_
                     print(f"Copying {file} to {output_test}")
 
 
+# Functions that handle CPCS separately
+def copy_files_for_cpcs(train_input_paths, test_input_paths, train_output, test_output, user_train_set, user_test_set, action_train_set, action_test_set):
+    """
+    File partitioning function specifically for CPCS dataset.
+
+    params:
+    train_input_paths (list): Training set input folder path list
+    test_input_paths (list): Test set input folder path list
+    train_output (str): Training set output folder path
+    test_output (str): Test suite output folder path
+    user_train_set (set): The set of users that match the training set
+    user_test_set (set): The set of users that match the test set
+    action_train_set (set): Action set that matches the training set
+    action_test_set (set): Action set that matches the test set
+    """
+    # Make sure the output folder exists
+    os.makedirs(train_output, exist_ok=True)
+    os.makedirs(test_output, exist_ok=True)
+
+    # Processing training set data
+    for input_path in train_input_paths:
+        for file in os.listdir(input_path):
+            if file.endswith(".npy"):
+                user, action, _ = file.split("_")
+                if user in user_train_set and action in action_train_set:
+                    shutil.copy(os.path.join(input_path, file), train_output)
+                    print(f"Copying {file} to {train_output}")
+
+    # Processing test set data
+    for input_path in test_input_paths:
+        for file in os.listdir(input_path):
+            if file.endswith(".npy"):
+                user, action, _ = file.split("_")
+                if user in user_test_set and action in action_test_set:
+                    shutil.copy(os.path.join(input_path, file), test_output)
+                    print(f"Copying {file} to {test_output}")
 
 # Start dividing the data
+# CPCS
+USER_CPCS_TRAIN = U - {"13", "23", "24", "31"}
+USER_CPCS_TEST = {"13", "23", "24", "31"}
+ACTION_CPCS_TRAIN = A
+ACTION_CPCS_TEST = A
+
+CPCS_TRAIN = os.path.join(DATA_ROOT, "CPCS", "train")
+CPCS_TEST = os.path.join(DATA_ROOT, "CPCS", "test")
+
+# Create a destination folder
+os.makedirs(CPCS_TRAIN, exist_ok=True)
+os.makedirs(CPCS_TEST, exist_ok=True)
+
+# Processing CPCS dataset
+copy_files_for_cpcs(
+    [scene1_filtered_path],
+    [scene2_filtered_path, scene3_filtered_path, scene4_filtered_path],
+    CPCS_TRAIN,
+    CPCS_TEST,
+    USER_CPCS_TRAIN, USER_CPCS_TEST, ACTION_CPCS_TRAIN, ACTION_CPCS_TEST
+)
+
+print("CPCS finished")
+
 # CA
 USER_CA = U - {"13", "23", "24", "31"}
 ACTION_CA_TRAIN = A - set([f"{i:02d}" for i in range(1, 5)] + [f"{i:02d}" for i in range(23, 27)] +
                           [f"{i:02d}" for i in range(31, 35)] + [f"{i:02d}" for i in range(45, 49)])
 ACTION_CA_TEST = set([f"{i:02d}" for i in range(1, 5)] + [f"{i:02d}" for i in range(23, 27)] +
                      [f"{i:02d}" for i in range(31, 35)] + [f"{i:02d}" for i in range(45, 49)])
+
 
 # destination
 CA_TRAIN = os.path.join(DATA_ROOT, "CA", "train")
@@ -111,66 +172,3 @@ copy_files_based_on_conditions([scene1_filtered_path], CACP_TRAIN, CACP_TEST,
                                USER_CACP_TRAIN, USER_CACP_TEST, ACTION_CACP_TRAIN, ACTION_CACP_TEST)
 
 print("CACP finished")
-
-
-# Functions that handle CPCS separately
-def copy_files_for_cpcs(train_input_paths, test_input_paths, train_output, test_output, user_train_set, user_test_set, action_train_set, action_test_set):
-    """
-    File partitioning function specifically for CPCS dataset.
-
-    params:
-    train_input_paths (list): Training set input folder path list
-    test_input_paths (list): Test set input folder path list
-    train_output (str): Training set output folder path
-    test_output (str): Test suite output folder path
-    user_train_set (set): The set of users that match the training set
-    user_test_set (set): The set of users that match the test set
-    action_train_set (set): Action set that matches the training set
-    action_test_set (set): Action set that matches the test set
-    """
-    # Make sure the output folder exists
-    os.makedirs(train_output, exist_ok=True)
-    os.makedirs(test_output, exist_ok=True)
-
-    # Processing training set data
-    for input_path in train_input_paths:
-        for file in os.listdir(input_path):
-            if file.endswith(".npy"):
-                user, action, _ = file.split("_")
-                if user in user_train_set and action in action_train_set:
-                    shutil.copy(os.path.join(input_path, file), train_output)
-                    print(f"Copying {file} to {train_output}")
-
-    # Processing test set data
-    for input_path in test_input_paths:
-        for file in os.listdir(input_path):
-            if file.endswith(".npy"):
-                user, action, _ = file.split("_")
-                if user in user_test_set and action in action_test_set:
-                    shutil.copy(os.path.join(input_path, file), test_output)
-                    print(f"Copying {file} to {test_output}")
-
-
-# CPCS
-USER_CPCS_TRAIN = U - {"13", "23", "24", "31"}
-USER_CPCS_TEST = {"13", "23", "24", "31"}
-ACTION_CPCS_TRAIN = A
-ACTION_CPCS_TEST = A
-
-CPCS_TRAIN = os.path.join(DATA_ROOT, "CPCS", "train")
-CPCS_TEST = os.path.join(DATA_ROOT, "CPCS", "test")
-
-# Create a destination folder
-os.makedirs(CPCS_TRAIN, exist_ok=True)
-os.makedirs(CPCS_TEST, exist_ok=True)
-
-# Processing CPCS dataset
-copy_files_for_cpcs(
-    [scene1_filtered_path],
-    [scene2_filtered_path, scene3_filtered_path, scene4_filtered_path],
-    CPCS_TRAIN,
-    CPCS_TEST,
-    USER_CPCS_TRAIN, USER_CPCS_TEST, ACTION_CPCS_TRAIN, ACTION_CPCS_TEST
-)
-
-print("CPCS finished")
