@@ -68,17 +68,17 @@ class Xrf55TrainEnhanced(Dataset):
              while an even index indicates selecting waveforms from different types (negative sample)
         output：1. two waveforms selected from the training set, as the input for the Siamese Networks
             2. a label, with the format of a [(1)] tensor,
-               label=1.0 means the positive sample, label=0.0 means the negative sample
+               label=0.0 means the positive sample, label=1.0 means the negative sample
         """
         # positive sample
         if index % 2 == 1:
-            label = 1.0
+            label = 0.0
             idx1 = random.randint(0, self.num_class - 1)
             action = random.randint(0, self.num_action - 1)  # the a_{train}
             wave1, wave2 = random.sample(self.datas[idx1][action], 2)  # use random.sample to ensure they are different
         # negative sample
         else:
-            label = 0.0
+            label = 1.0
             idx1, idx2 = random.sample(range(0, self.num_class - 1), 2)
             action = random.randint(0, self.num_action - 1)  # the a_{train}
             wave1 = random.choice(self.datas[idx1][action])

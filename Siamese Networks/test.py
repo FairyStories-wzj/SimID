@@ -72,10 +72,10 @@ for ck_point in os.listdir(CHECKPOINT_PATH):
                     score[classes[i]] += output[i]
                     count[classes[i]] += 1
             predict_res = -1
-            predict_score = -100000000
+            predict_score = 100000000
             for class_i in score.keys():
                 avg_score = score[class_i] / count[class_i]
-                if avg_score > predict_score:
+                if avg_score < predict_score:
                     predict_score = avg_score
                     predict_res = class_i
 

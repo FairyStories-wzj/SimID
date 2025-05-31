@@ -45,11 +45,11 @@ def copy_files_based_on_conditions(input_paths, output_train, output_test, user_
                 if user in user_train_set and action in action_train_set:
                     # Copy to the training set folder
                     shutil.copy(os.path.join(input_path, file), output_train)
-                    print(f"Copying {file} to {output_train}")
+                    print(f"Copying {input_path}, {file} to {output_train}")
                 elif user in user_test_set and action in action_test_set:
                     # Copy to the test set folder
                     shutil.copy(os.path.join(input_path, file), output_test)
-                    print(f"Copying {file} to {output_test}")
+                    print(f"Copying {input_path}, {file} to {output_test}")
 
 
 # Functions that handle CPCS separately
@@ -78,7 +78,7 @@ def copy_files_for_cpcs(train_input_paths, test_input_paths, train_output, test_
                 user, action, _ = file.split("_")
                 if user in user_train_set and action in action_train_set:
                     shutil.copy(os.path.join(input_path, file), train_output)
-                    print(f"Copying {file} to {train_output}")
+                    print(f"Copying {input_path}, {file} to {train_output}")
 
     # Processing test set data
     for input_path in test_input_paths:
@@ -87,12 +87,12 @@ def copy_files_for_cpcs(train_input_paths, test_input_paths, train_output, test_
                 user, action, _ = file.split("_")
                 if user in user_test_set and action in action_test_set:
                     shutil.copy(os.path.join(input_path, file), test_output)
-                    print(f"Copying {file} to {test_output}")
+                    print(f"Copying {input_path}, {file} to {test_output}")
 
 # Start dividing the data
 # CPCS
-USER_CPCS_TRAIN = U - {"13", "23", "24", "31"}
-USER_CPCS_TEST = {"13", "23", "24", "31"}
+USER_CPCS_TRAIN = U - {"03", "04", "05", "06", "07", "13", "23", "24", "31"}
+USER_CPCS_TEST = {"03", "04", "05", "06", "07", "13", "23", "24", "31"}
 ACTION_CPCS_TRAIN = A
 ACTION_CPCS_TEST = A
 
@@ -115,11 +115,11 @@ copy_files_for_cpcs(
 print("CPCS finished")
 
 # CA
-USER_CA = U - {"13", "23", "24", "31"}
-ACTION_CA_TRAIN = A - set([f"{i:02d}" for i in range(1, 5)] + [f"{i:02d}" for i in range(23, 27)] +
-                          [f"{i:02d}" for i in range(31, 35)] + [f"{i:02d}" for i in range(45, 49)])
-ACTION_CA_TEST = set([f"{i:02d}" for i in range(1, 5)] + [f"{i:02d}" for i in range(23, 27)] +
-                     [f"{i:02d}" for i in range(31, 35)] + [f"{i:02d}" for i in range(45, 49)])
+USER_CA = U - {"31"}
+ACTION_CA_TRAIN = A - set([f"{i:02d}" for i in range(12, 16)] + [f"{i:02d}" for i in range(27, 31)] +
+                          [f"{i:02d}" for i in range(41, 45)] + [f"{i:02d}" for i in range(52, 56)])
+ACTION_CA_TEST = set([f"{i:02d}" for i in range(12, 16)] + [f"{i:02d}" for i in range(27, 31)] +
+                     [f"{i:02d}" for i in range(41, 45)] + [f"{i:02d}" for i in range(52, 56)])
 
 
 # destination
@@ -136,16 +136,14 @@ copy_files_based_on_conditions([scene1_filtered_path], CA_TRAIN, CA_TEST, USER_C
 print("CA finished")
 
 # CP
-USER_CP_TEST = set([f"{i:02d}" for i in range(1, 10)])
-USER_CP_TRAIN = U - set([f"{i:02d}" for i in range(1, 10)] + ["13", "23", "24", "31"])
+USER_CP_TEST = set([f"{i:02d}" for i in range(21, 31)])
+USER_CP_TRAIN = U - set([f"{i:02d}" for i in range(21, 31)] + ["31"])
 ACTION_CP = A
 
-CA_TRAIN = os.path.join(DATA_ROOT, "CA", "train")
-CA_TEST = os.path.join(DATA_ROOT, "CA", "test")
 CP_TRAIN = os.path.join(DATA_ROOT, "CP", "train")
 CP_TEST = os.path.join(DATA_ROOT, "CP", "test")
 
-os.makedirs(CA_TRAIN, exist_ok=True)
+os.makedirs(CP_TRAIN, exist_ok=True)
 os.makedirs(CP_TRAIN, exist_ok=True)
 
 # Processing CP dataset
@@ -155,10 +153,10 @@ copy_files_based_on_conditions([scene1_filtered_path], CP_TRAIN, CP_TEST, USER_C
 print("CP finished")
 
 # CACP
-USER_CACP_TRAIN = U - set([f"{i:02d}" for i in range(1, 10)] + ["13", "23", "24", "31"])
-USER_CACP_TEST = set([f"{i:02d}" for i in range(1, 10)])
-ACTION_CACP_TEST = set([f"{i:02d}" for i in range(1, 5)] + [f"{i:02d}" for i in range(23, 27)] +
-                           [f"{i:02d}" for i in range(31, 35)] + [f"{i:02d}" for i in range(45, 49)])
+USER_CACP_TRAIN = U - set([f"{i:02d}" for i in range(21, 31)] + ["31"])
+USER_CACP_TEST = set([f"{i:02d}" for i in range(21, 31)])
+ACTION_CACP_TEST = set([f"{i:02d}" for i in range(12, 16)] + [f"{i:02d}" for i in range(27, 31)] +
+                           [f"{i:02d}" for i in range(41, 45)] + [f"{i:02d}" for i in range(52, 56)])
 ACTION_CACP_TRAIN = A - ACTION_CACP_TEST
 
 CACP_TRAIN = os.path.join(DATA_ROOT, "CACP", "train")

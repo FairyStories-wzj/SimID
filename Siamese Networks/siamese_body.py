@@ -42,10 +42,8 @@ class SiameseNetwork(nn.Module):
         out = self.future_encoder.forward(waves)
         out1 = out[:x1.size(0)]
         out2 = out[x1.size(0):]
-        # We used a similarity computation module similar to that in Prototypical Networks,
-        # but the Siamese Networks will have one less normalization
+        # use the l2 distance
         dis = (out1 - out2) ** 2
-        dis = self.norm(dis)
-        dis = self.linear(dis)
+        dis = torch.sum(dis, dim=1, keepdim=True)
 
         return dis
