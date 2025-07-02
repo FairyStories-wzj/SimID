@@ -1,3 +1,21 @@
+"""
+CSI Data Batch Filtering Script
+--------------------------------
+This script applies a Butterworth low-pass filter to all .npy files (CSI data) in a given folder (and its subfolders),
+and saves the filtered results to a new folder with the suffix '_filtered'.
+
+Usage:
+    1. Set the input_folder variable (at the bottom) to your own data root path.
+    2. Optionally, set the sub_folders list to the subdirectories you want to process.
+    3. Run this script directly: python filter_data.py
+    4. The filtered files will be saved in a new folder named <original_folder>_filtered for each subfolder.
+
+Note:
+    - Please replace the example path (e.g., r"F:/dataset/xrf55_for_siamid") with your actual data path.
+    - The script uses multi-threading for acceleration.
+    - Only .npy files will be processed.
+"""
+
 import numpy as np
 from scipy import signal
 import os
@@ -29,6 +47,7 @@ def filter_csi_file(file_path, output_folder):
 
         flt_csi = np.zeros_like(ori_csi)
 
+        # Butterworth low-pass filter, order=2, cutoff=2Hz (sampling rate assumed 100Hz)
         b, a = signal.butter(2, 2 / 100, btype='low')
 
         for i in range(ori_csi.shape[0]):
@@ -78,18 +97,18 @@ def process_folder(input_folder, output_folder, num_threads=None):
     npy_files = get_all_npy_files(input_folder)
 
     if not npy_files:
-        print(f"warning: no npy files were found in {input_folder} an its sub folders")
+        print(f"Warning: No npy files were found in {input_folder} and its subfolders.")
         return
 
-    print(f"{len(npy_files)} NPY files are to be processed")
+    print(f"{len(npy_files)} NPY files are to be processed.")
 
     if num_threads is None:
         try:
             num_threads = multiprocessing.cpu_count()
         except Exception:
-            num_threads = 4  # the default number of the threads
+            num_threads = 4  # Default number of threads
 
-    print(f"the number of the threads: {num_threads}")
+    print(f"Number of threads: {num_threads}")
 
     total_start_time = time.time()
     results = []
@@ -103,25 +122,25 @@ def process_folder(input_folder, output_folder, num_threads=None):
             try:
                 file_name, status, proc_time, error = future.result()
                 results.append((file_name, status, proc_time, error))
-                print(f"the file {file_name} is finnished, state: {status}, time consumed: {proc_time:.2f}seconds")
+                print(f"File {file_name} finished, state: {status}, time consumed: {proc_time:.2f} seconds.")
             except Exception as exc:
                 file_name = os.path.basename(file)
                 results.append((file_name, "error", 0, str(exc)))
-                print(f"the file {file_name} errored: {str(exc)}")
+                print(f"File {file_name} errored: {str(exc)}")
 
     total_time = time.time() - total_start_time
     success_count = sum(1 for _, status, _, _ in results if status == "success")
     failure_count = len(results) - success_count
 
-    print("\nthe summary of the processing:")
-    print(f"the number of the files: {len(npy_files)}")
-    print(f"successed: {success_count}")
-    print(f"failed: {failure_count}")
-    print(f"time: {total_time:.2f}sec")
-    print(f"average: {total_time / len(npy_files):.2f}sec")
+    print("\nSummary of the processing:")
+    print(f"Total files: {len(npy_files)}")
+    print(f"Succeeded: {success_count}")
+    print(f"Failed: {failure_count}")
+    print(f"Total time: {total_time:.2f} sec")
+    print(f"Average per file: {total_time / len(npy_files):.2f} sec")
 
     if failure_count > 0:
-        print("\nfailed:")
+        print("\nFailed files:")
         for file_name, status, proc_time, error in results:
             if status != "success":
                 print(f"- {file_name}: {status} ({'message: ' + error if error else ''})")
@@ -131,25 +150,27 @@ def process_folder(input_folder, output_folder, num_threads=None):
 
 def run_filter(input_folder, num_threads=None):
     """
-    Run the CSI data processing flow and save the filtered files to a new folder
+    Run the CSI data processing flow and save the filtered files to a new folder.
 
-    params:
-    input_folder (str): Path to the root folder containing NPY files
-    num_threads (int, optional): The number of threads to use, defaults to the number of CPU cores
+    Parameters:
+    input_folder (str): Path to the root folder containing NPY files.
+    num_threads (int, optional): The number of threads to use, defaults to the number of CPU cores.
     """
 
     output_folder = input_folder + "_filtered"
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    print(f"start: {input_folder}...")
+    print(f"Start processing: {input_folder} ...")
     results = process_folder(input_folder, output_folder, num_threads)
-    print("\nfinnished")
+    print("\nFinished.")
 
 
 if __name__ == "__main__":
-    input_folder = r"F:\dataset\xrf55_for_simid"
-    sub_folders = ["scene1", "scene2", "scene3", "scene4"]
+    # Please set your own data root path here. Example:
+    # input_folder = r"F:/dataset/xrf55_for_siamid"
+    input_folder = r"<your_data_root_path>"  # <-- Change this to your own data path
+    sub_folders = ["scene1", "scene2", "scene3", "scene4"]  # <-- Change or extend as needed
 
     for sub_folder in sub_folders:
         full_input_folder = os.path.join(input_folder, sub_folder)
