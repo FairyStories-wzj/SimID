@@ -117,7 +117,7 @@ def process_folder(input_folder, output_folder, num_threads=None):
     print(f"the number of the files: {len(npy_files)}")
     print(f"successed: {success_count}")
     print(f"failed: {failure_count}")
-    print(f"time: {total_time:.2f}秒")
+    print(f"time: {total_time:.2f}sec")
     print(f"average: {total_time / len(npy_files):.2f}sec")
 
     if failure_count > 0:

@@ -13,21 +13,25 @@ from dataset_loader import Xrf55TrainEnhanced
 
 random.seed(42)
 
+# Addresses
 TRAIN_PATH = "E:\\Xrf55\\CACP\\train"  # path to the training set
 CHECKPOINT_PATH = "E:\\Python Project\\SimID\\models\\CACP"  # the place to save the checkpoint
 # When a checkpoint named "model-checkpoint-last.pt" exists under CHECKPOINT_PATH, the model will continue training from this checkpoint.
 FIGURE_PATH = "E:\\Python Project\\SimID\\models\\CACP"  # the place to save the training curve figure
+
+# Network architecture
 HEAD = 'SENet'  # feature encoder, you can choose ResNet/DenseNet/SENet/SENet18
 
-# the hyperparameters for training
+# Hyperparameters
 BATCH_SIZE = 128
 LR = 0.1
+MAX_ITER = 15000  # max iteration for training
 
+# Configs
 SHOW_EVERY = 1  # how often (in terms of training epochs) the training loss and elapsed time are displayed during training
 DRAW_EVERY = 100  # how often (in terms of training epochs) the training curve is sampled
 SAVE_EVERY = 100  # how often (in terms of training epochs) the checkpoint 'model-checkpoint-last.pt' is saved
 BACKUP_EVERY = 1000  # how often (in terms of training epochs) the checkpoint 'model-checkpoint-iterxxx.pt' is saved
-MAX_ITER = 15000  # max iteration for training
 
 # GPU
 CUDA = True

@@ -1,6 +1,6 @@
 """
-The SE-ResNet which is not originally written by the authors, but copied from https://github.com/moskomule/senet.pytorch/blob/master/senet/se_resnet.py
-But what we do is modifying it to an 1D version, to make sure it can process 2D waveforms, not 3D images
+The SE-ResNet code is from https://github.com/moskomule/senet.pytorch/blob/master/senet/se_resnet.py
+But we have modified it to an 1D version, to make sure it can process 2D waveforms, not 3D images
 """
 import torch.nn as nn
 

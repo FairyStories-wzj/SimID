@@ -28,7 +28,7 @@ class SiameseNetwork(nn.Module):
             self.future_encoder = SEResNet(block=SEBasicBlock, layers=[2, 2, 2, 2])
             self.future_size = 512
         else:
-            print(f"error：not feature encoder named {head}")
+            print(f"error：no feature encoder named {head}")
 
         self.linear = nn.Linear(self.future_size, 1)
         self.norm = nn.BatchNorm1d(self.future_size)

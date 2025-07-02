@@ -2,8 +2,9 @@
 The DenseNet code is from https://github.com/pytorch/vision/blob/main/torchvision/models/densenet.py
 But we have modified it to an 1D version, to make sure it can process 2D waveforms, not 3D images
 """
+
 from collections import OrderedDict
-from typing import List, Tuple
+from typing import Any, List, Optional, Tuple
 
 import torch
 import torch.nn as nn

@@ -1,5 +1,5 @@
 """
-the dataset loader for siamese networks and XRF55 dataset, implemented by the way mentioned in paper
+the dataset loader for siamese networks and XRF55 dataset
 """
 import os
 import sys
@@ -95,9 +95,9 @@ class Xrf55Predict(Dataset):
         super(Xrf55Predict, self).__init__()
         self.datas, self.num_class, self.num_action = loadToMemEnhanced(data_path, "test")
         self.candidate = None  # the query
-        self.candidateClass = None  # the u|query
-        self.candidateAction = None  #  the a|query or a_{test}
-        self.candidateIndex = None  # the index of query in data[u|query][a|query][]
+        self.candidateClass = None  # the category of the query or u_{test}
+        self.candidateAction = None  #  the action of the query or a_{test}
+        self.candidateIndex = None  # the index of query in data[u_{test}][a_{test}][]
 
 
     def getCandidate(self):

@@ -1,6 +1,7 @@
 """
 The ResNet code is from https://github.com/aiotgroup/XRF55-repo/blob/main/model/resnet1d.py
 """
+
 import torch.nn as nn
 
 
@@ -95,7 +96,7 @@ class ResNet(nn.Module):
         output = self.avg_pool(c4)
         output = output.view(output.size(0), -1)
 
-        # output = self.fc(output)  the fc layer should be removed to get a 512-dimension feature vector
+        # output = self.fc(output)
         return output
 
     def out_layer(self, x):

@@ -4,7 +4,6 @@ Please note: Since the testing is random, you may not be able to reproduce resul
 but you should be able to achieve results that are fairly close.
 """
 import os
-import re
 import time
 import random
 import numpy as np
@@ -12,8 +11,6 @@ import torch
 
 from dataset_loader import Xrf55Predict
 from siamese_body import SiameseNetwork
-
-random.seed(42)
 
 TEST_PATH = "E:\\Xrf55\\CACP\\test"  # path to the test set
 CHECKPOINT_PATH = "E:\\Python Project\\SimID\\models\\CACP"  # path to where the checkpoints are saved
@@ -92,14 +89,14 @@ for ck_point in os.listdir(CHECKPOINT_PATH):
                 # print("   correct")
                 correct += 1
             else:
-                # print("  error")
+                # print("  wrong")
                 error_flag = True
                 error += 1
 
         accuracy = correct / (correct + error)
-        print("evaluation over，accuracy", accuracy)
-        print("average time：", np.mean(predicting_times))
+        print("evaluation over, accuracy:", accuracy)
+        print("average time:", np.mean(predicting_times))
         accuracies.append(accuracy)
 
-print("average in all checkpoints：", np.mean(accuracies))
-print("the best checkpoint：", np.max(accuracies))
+print("average over all checkpoints:", np.mean(accuracies))
+print("the best checkpoint:", np.max(accuracies))
