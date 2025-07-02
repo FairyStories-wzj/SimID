@@ -111,10 +111,80 @@ Lei Ouyang will write this later.
 
 ### 2.3 data seperation
 
-Finally, we can 
+Finally, we can seperate the data into four data splitting settings: CPCS, CA, CP, and CACP.
 
+Now make sure you have the file architecture like this:
+
+~~~
+xrf55_for_simid/
+├──scene1_filtered/
+|   ├── 01_01_01.npy
+|   ├── 01_01_02.npy
+|   └── ...
+├──scene2_filtered/
+|   └── ...
+├──scene3_filtered/
+|   └── ...
+└──scene4_filtered/
+    └── ...
+~~~
+
+Open the file `simid-dataset/separate_data.py`, and fill in the address:
+
+~~~python
+# the path to the data
+DATA_ROOT = "you-path-to-simid\\xrf55_for_simid"
+scene1_filtered_path = os.path.join(DATA_ROOT, "scene1_filtered")
+scene2_filtered_path = os.path.join(DATA_ROOT, "scene2_filtered")
+scene3_filtered_path = os.path.join(DATA_ROOT, "scene3_filtered")
+scene4_filtered_path = os.path.join(DATA_ROOT, "scene4_filtered")
+~~~
+
+Run the file `simid-dataset/separate_data.py`, you will get the file architecture like this:
+
+~~~
+xrf55_for_simid/
+├── CA/
+|   ├── test/
+|   |   ├── 01_12_01.npy
+|   |   ├── 01_12_02.npy
+|   |   └── ...
+|   └── train/
+|       ├── 01_01_01.npy
+|       ├── 01_01_02.npy
+|       └── ...  
+├──CACP/
+|   ├── test/
+|   |   └── ...  
+|   └── train/
+|       └── ...  
+├──CP/
+|   └── ...
+└──CPCS/
+    └── ...
+~~~
+
+Now you can use your data to train or test our models.
 
 ## 3 Training
+
+### 3.1 Siamese Networks & Prototypical Network
+
+Open file `Siamese Networks/train.py` or `Prototypical Network/train.py`, and fill in parameters in "Addresses" "Network architecture" "Hyperparameters" "Configs", and "GPU", like what is already in it.
+
+Run the file, and you will get:
+
+1. A training curve under `FIGURE_PATH`
+2. Several checkpoints under `CHECKPOINT_PATH`
+3. Information about each iteration output in console
+
+### 3.2 Relation Network
+
+Please follow the guide in `Relation Network/README.md`
+
+### 3.3 Pretrained Checkpoints
+
+You can also use our pretrained checkpoints provided in `model` instead of training by yourself.
 
 ## 4 Test
 
