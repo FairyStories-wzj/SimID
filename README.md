@@ -184,28 +184,28 @@ Please follow the guide in `Relation Network/README.md`
 
 ### 3.3 Pretrained Checkpoints
 
-You can also use our pretrained checkpoints provided in `model` instead of training by yourself.
+You can also use our pretrained checkpoints provided in [model path] instead of training by yourself.
 
 ## 4 Test
+
+### 4.1 Siamese Networks & Prototypical Network
+
+Open file `Siamese Networks/test.py` or `Prototypical Network/test.py`, and fill in parameters like what is already in it.
+
+Run the file, and you will get:
+
+1. The accuracy and evaluation time of each checkpoint under `CHECKPOINT_PATH`
+2. The best and average accuracy over all the checkpoints
+3. The average evaluation time of all the evaluation rounds and its standard deviation
+
+### 4.2 Relation Network
+
+Please follow the guide in `Relation Network/README.md`
 
 ---
 
 # Citation
 
-The Seperation of Data
+If you find our work helpful for your research, please consider citation:
 
-After filtering the dataset, at the path to the filtered dataset, run
-
-~~~bash
-python move_data.py
-~~~
-
-This would move and reorganize the dataset.
-
-Then at the path to the moved dataset, run
-
-~~~bash
-python seperate_data.py
-~~~
-
-to seperate the dataset.
+[cite information]

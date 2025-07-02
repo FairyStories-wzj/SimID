@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader
 from prototypical_body import PrototypicalNetwork
 
 # 路径
-SUPPORT_PATH = "E:\\Xrf55\\CACP\\test"  # path to the test set
+TEST_PATH = "E:\\Xrf55\\CACP\\test"  # path to the test set
 CHECKPOINT_PATH = "E:\\Python Project\\SimID\\models\\test"  # path to where the checkpoints are saved
 # all the files end with '.pt' under the CHECKPOINT_PATH would be evaluated
 PREDICT_TIME = 5000  # the rounds of test
@@ -26,7 +26,7 @@ GPU_IDS = "0"
 os.environ["CUDA_VISIBLE_DEVICES"] = GPU_IDS
 print("use device:", GPU_IDS, "to test.")
 
-predict_set = Xrf55Predict(SUPPORT_PATH, SHOT, 1, "test")
+predict_set = Xrf55Predict(TEST_PATH, SHOT, 1, "test")
 predict_loader = DataLoader(predict_set, batch_size=1, num_workers=0)
 
 net = PrototypicalNetwork(dis_f=DIS_F, head=HEAD)
