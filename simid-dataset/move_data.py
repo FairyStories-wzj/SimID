@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 import shutil
 
+# the path to the input dataset
 # part1 scene1
 PART1_SCENE1_WIFI = "F:\\dataset\\xrf55\\part1\\Scene1\\Scene1\\WiFi"
 # part2 scene1
@@ -13,6 +14,7 @@ PART1_SCENE3_WIFI = "F:\\dataset\\xrf55\\part1\\Scene3\\Scene3\\WiFi"
 # part1 scene4
 PART1_SCENE4_WIFI = "F:\\dataset\\xrf55\\part1\\Scene4\\Scene4\\WiFi"
 
+# the path to the output of the dataset
 SCENE1 = "F:\\dataset\\xrf55_for_siamid\\scene1\\"
 SCENE2 = "F:\\dataset\\xrf55_for_siamid\\scene2\\"
 SCENE3 = "F:\\dataset\\xrf55_for_siamid\\scene3\\"
