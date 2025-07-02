@@ -4,31 +4,30 @@ Siamese Networks + different feature encoders
 import os
 import torch
 import time
+import random
 import numpy as np
 import matplotlib.pyplot as plt
 from siamese_body import SiameseNetwork
 from torch.utils.data import DataLoader
 from dataset_loader import Xrf55TrainEnhanced
 
+random.seed(42)
 
 TRAIN_PATH = "E:\\Xrf55\\CACP\\train"  # path to the training set
-CHECKPOINT_PATH = "D:\\PythonProject\\xrf55-twin-network\\models\\CA&P"  # the place to save the checkpoint
+CHECKPOINT_PATH = "E:\\Python Project\\SimID\\models\\CACP"  # the place to save the checkpoint
 # When a checkpoint named "model-checkpoint-last.pt" exists under CHECKPOINT_PATH, the model will continue training from this checkpoint.
-FIGURE_PATH = "D:\\PythonProject\\xrf55-twin-network\\models\\CA&P"  # the place to save the training curve figure
+FIGURE_PATH = "E:\\Python Project\\SimID\\models\\CACP"  # the place to save the training curve figure
 HEAD = 'SENet'  # feature encoder, you can choose ResNet/DenseNet/SENet/SENet18
 
 # the hyperparameters for training
 BATCH_SIZE = 128
 LR = 0.1
-LR_DECAY = 0.8
-LR_DECAY_EVERY = 30
-LR_LIMIT = 1e-6
 
 SHOW_EVERY = 1  # how often (in terms of training epochs) the training loss and elapsed time are displayed during training
-DRAW_EVERY = 10  # how often (in terms of training epochs) the training curve is sampled
-SAVE_EVERY = 10  # how often (in terms of training epochs) the checkpoint 'model-checkpoint-last.pt' is saved
-BACKUP_EVERY = 500  # how often (in terms of training epochs) the checkpoint 'model-checkpoint-iterxxx.pt' is saved
-MAX_ITER = 20000  # max iteration for training
+DRAW_EVERY = 100  # how often (in terms of training epochs) the training curve is sampled
+SAVE_EVERY = 100  # how often (in terms of training epochs) the checkpoint 'model-checkpoint-last.pt' is saved
+BACKUP_EVERY = 1000  # how often (in terms of training epochs) the checkpoint 'model-checkpoint-iterxxx.pt' is saved
+MAX_ITER = 15000  # max iteration for training
 
 # GPU
 CUDA = True
@@ -84,7 +83,7 @@ def save_iter(iter_id, checkpoint_name):
         'optimizer_state_dict': optimizer.state_dict(),
         'train_loss': train_loss,
         'train_loss_x': train_loss_x,
-        'lr': LR,  # 当前学习率，
+        'lr': LR,
         'last_iter': iter_id
     }, checkpoint_path)
 
@@ -135,11 +134,6 @@ for iter_id, (wave1, wave2, label) in enumerate(train_loader, last_iter + 1):
 
     if iter_id % SAVE_EVERY == 0:
         save_iter(iter_id, "model-checkpoint-last.pt")
-
-    # Attenuation the learning rate
-    if iter_id % LR_DECAY_EVERY == 0 and LR > LR_LIMIT:
-        LR = LR * LR_DECAY
-        print("The LR now:", LR)
 
     plt.close('all')
 

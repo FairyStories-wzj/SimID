@@ -4,15 +4,19 @@ Please note: Since the testing is random, you may not be able to reproduce resul
 but you should be able to achieve results that are fairly close.
 """
 import os
+import re
 import time
+import random
 import numpy as np
 import torch
 
 from dataset_loader import Xrf55Predict
 from siamese_body import SiameseNetwork
 
-TEST_PATH = "E:\\Xrf55\\CPCS\\test"  # path to the test set
-CHECKPOINT_PATH = "D:\\PythonProject\\xrf55-twin-network\\models\\CP&S_Retry"  # path to where the checkpoints are saved
+random.seed(42)
+
+TEST_PATH = "E:\\Xrf55\\CACP\\test"  # path to the test set
+CHECKPOINT_PATH = "E:\\Python Project\\SimID\\models\\CACP"  # path to where the checkpoints are saved
 # all the files end with '.pt' under the CHECKPOINT_PATH would be evaluated
 PREDICT_TIME = 5000  # the rounds of test
 HEAD = 'SENet'  # make sure that you choose the same feature encoder as the training process
