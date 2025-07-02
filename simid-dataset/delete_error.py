@@ -17,6 +17,6 @@ def delete_temp_filtered_files(data_root):
                 os.remove(file_path)
                 print(f"deleted: {file_path}")
 
-DATA_ROOT = "F:\\dataset\\xrf55_for_siamid"
+DATA_ROOT = "F:\\dataset\\xrf55_for_simid"
 
 delete_temp_filtered_files(DATA_ROOT)

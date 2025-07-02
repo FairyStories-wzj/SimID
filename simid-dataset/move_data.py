@@ -15,10 +15,10 @@ PART1_SCENE3_WIFI = "F:\\dataset\\xrf55\\part1\\Scene3\\Scene3\\WiFi"
 PART1_SCENE4_WIFI = "F:\\dataset\\xrf55\\part1\\Scene4\\Scene4\\WiFi"
 
 # the path to the output of the dataset
-SCENE1 = "F:\\dataset\\xrf55_for_siamid\\scene1\\"
-SCENE2 = "F:\\dataset\\xrf55_for_siamid\\scene2\\"
-SCENE3 = "F:\\dataset\\xrf55_for_siamid\\scene3\\"
-SCENE4 = "F:\\dataset\\xrf55_for_siamid\\scene4\\"
+SCENE1 = "F:\\dataset\\xrf55_for_simid\\scene1\\"
+SCENE2 = "F:\\dataset\\xrf55_for_simid\\scene2\\"
+SCENE3 = "F:\\dataset\\xrf55_for_simid\\scene3\\"
+SCENE4 = "F:\\dataset\\xrf55_for_simid\\scene4\\"
 
 SCENE_DIRS = [
     Path(SCENE1),

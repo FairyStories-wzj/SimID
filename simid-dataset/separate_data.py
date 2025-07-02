@@ -10,7 +10,7 @@ U = set([f"{i:02d}" for i in range(1, 32)])
 A = set([f"{i:02d}" for i in range(1, 56)]) - set([f"{i:02d}" for i in range(16, 23)])
 
 # the path to the data
-DATA_ROOT = "F:\\dataset\\xrf55_for_siamid"
+DATA_ROOT = "F:\\dataset\\xrf55_for_simid"
 scene1_filtered_path = os.path.join(DATA_ROOT, "scene1_filtered")
 scene2_filtered_path = os.path.join(DATA_ROOT, "scene2_filtered")
 scene3_filtered_path = os.path.join(DATA_ROOT, "scene3_filtered")

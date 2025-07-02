@@ -10,7 +10,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.utils.checkpoint as cp
-from torch import Tensor  #
+from torch import Tensor
 
 
 __all__ = [

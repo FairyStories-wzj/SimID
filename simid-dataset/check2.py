@@ -4,14 +4,14 @@ This program is aiming to check if the seperated CA, CP, CACP and CPCS are corre
 import os
 import filecmp
 
-CA_PATH = "F:\\dataset\\xrf55_for_siamid\\CA"
-CP_PATH = "F:\\dataset\\xrf55_for_siamid\\CP"
-CACP_PATH = "F:\\dataset\\xrf55_for_siamid\\CACP"
-CPCS_PATH = "F:\\dataset\\xrf55_for_siamid\\CPCS"
-SCENE1_PATH = "F:\\dataset\\xrf55_for_siamid\\scene1_filtered"
-SCENE2_PATH = "F:\\dataset\\xrf55_for_siamid\\scene2_filtered"
-SCENE3_PATH = "F:\\dataset\\xrf55_for_siamid\\scene3_filtered"
-SCENE4_PATH = "F:\\dataset\\xrf55_for_siamid\\scene4_filtered"
+CA_PATH = "F:\\dataset\\xrf55_for_simid\\CA"
+CP_PATH = "F:\\dataset\\xrf55_for_simid\\CP"
+CACP_PATH = "F:\\dataset\\xrf55_for_simid\\CACP"
+CPCS_PATH = "F:\\dataset\\xrf55_for_simid\\CPCS"
+SCENE1_PATH = "F:\\dataset\\xrf55_for_simid\\scene1_filtered"
+SCENE2_PATH = "F:\\dataset\\xrf55_for_simid\\scene2_filtered"
+SCENE3_PATH = "F:\\dataset\\xrf55_for_simid\\scene3_filtered"
+SCENE4_PATH = "F:\\dataset\\xrf55_for_simid\\scene4_filtered"
 CA = 0
 CP = 1
 CACP = 2

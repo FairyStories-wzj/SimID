@@ -148,7 +148,7 @@ def run_filter(input_folder, num_threads=None):
 
 
 if __name__ == "__main__":
-    input_folder = r"F:\dataset\xrf55_for_siamid"
+    input_folder = r"F:\dataset\xrf55_for_simid"
     sub_folders = ["scene1", "scene2", "scene3", "scene4"]
 
     for sub_folder in sub_folders:

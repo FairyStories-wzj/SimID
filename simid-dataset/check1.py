@@ -3,10 +3,10 @@ This program is aiming to check if the original XRF55 dataset is intact and corr
 """
 import os
 
-SCENE1_PATH = "F:\\dataset\\xrf55_for_siamid\\scene1_filtered"
-SCENE2_PATH = "F:\\dataset\\xrf55_for_siamid\\scene2_filtered"
-SCENE3_PATH = "F:\\dataset\\xrf55_for_siamid\\scene3_filtered"
-SCENE4_PATH = "F:\\dataset\\xrf55_for_siamid\\scene4_filtered"
+SCENE1_PATH = "F:\\dataset\\xrf55_for_simid\\scene1_filtered"
+SCENE2_PATH = "F:\\dataset\\xrf55_for_simid\\scene2_filtered"
+SCENE3_PATH = "F:\\dataset\\xrf55_for_simid\\scene3_filtered"
+SCENE4_PATH = "F:\\dataset\\xrf55_for_simid\\scene4_filtered"
 
 
 def check_intact(path, scene):
