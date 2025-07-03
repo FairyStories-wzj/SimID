@@ -23,13 +23,6 @@ This folder implements a Relation Network-based few-shot learning method, suitab
 ## 依赖环境 | Dependencies
 
 - Python 3.7+
-- torch (PyTorch)
-- numpy
-- pandas
-- scikit-learn
-- seaborn
-- matplotlib
-- tqdm
 
 建议使用`requirements.txt`统一安装依赖。
 It is recommended to use `requirements.txt` to install dependencies.

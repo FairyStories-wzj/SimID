@@ -1,5 +1,5 @@
-import subprocess
 import re  # 导入正则表达式模块 / Import regex module
+import subprocess
 
 # 允许用户输入模式 / Allow user to input mode
 mode = input("请输入模式（例如 'easy-filtered' 等）：\nPlease input mode (e.g. 'easy-filtered'): ")

@@ -1,14 +1,11 @@
 # --------------- main.py ---------------
 # 训练主入口 / Main entry for training
 import os
-import torch
-import random
-import numpy as np
 
+import dataloader
 from config import TrainingConfig
 from models import ModelManager
 from trainer import FewShotTrainer
-import dataloader
 
 
 def main():

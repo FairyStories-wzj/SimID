@@ -3,13 +3,11 @@
 import os
 
 import torch
-import random
-import numpy as np
-from sklearn.manifold import TSNE
+
+import dataloader
 from config import TrainingConfig
 from models import ModelManager
 from trainer import FewShotTrainer
-import dataloader
 
 
 def main():
@@ -43,8 +41,6 @@ def main():
         schedulers=schedulers
     )
     trainer.predict(predict_files)
-
-    # plot_tsne(features, labels)  # 可选：可视化特征分布 / Optional: visualize feature distribution
 
 if __name__ == '__main__':
     main()
