@@ -47,9 +47,6 @@ It is recommended to use `requirements.txt` to install dependencies.
   Relation network structure definition.
 - `SEResNet.py`：SE-ResNet特征提取网络。
   SE-ResNet feature extraction network.
-- `experienment_script.py`：批量实验脚本，自动多次运行预测并统计结果。
-  Batch experiment script, runs prediction multiple times and summarizes results.
-
 ---
 
 ## 数据路径说明 | Data Path Instructions
@@ -70,11 +67,6 @@ python main.py [optional_parameter]
 ### 预测 | Prediction
 ```bash
 python predict.py [optional_parameter]
-```
-
-### 批量实验 | Batch Experiment
-```bash
-python experienment_script.py
 ```
 
 ---
