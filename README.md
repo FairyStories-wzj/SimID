@@ -19,6 +19,7 @@ Clone or download our codes, and then install the required packages:
 torch==2.6.0+cu126
 numpy==2.1.2
 matplotlib==3.9.2
+pandas==2.0.3
 ~~~
 
 The operations used in this project are all basic in nature. Therefore, although the dependencies listed above were used during testing, it should also be possible to use other versions of the corresponding dependencies.
@@ -107,7 +108,44 @@ xrf55_for_simid/
 
 ### 2.2 data filtering
 
-Lei Ouyang will write this later.
+After moving the data, we need to apply a Butterworth low-pass filter to remove noise from the raw CSI data. We have provided a script `simid-dataset/filter_data.py` for this purpose.
+
+Open the file `simid-dataset/filter_data.py`, and modify the following parameters at the bottom of the file:
+
+```python
+# Please set your own data root path here. Example:
+# input_folder = r"your-output-path\\xrf55_for_simid"
+input_folder = r"<your_data_root_path>"  # <-- Change this to your own data path.
+sub_folders = ["scene1", "scene2", "scene3", "scene4"]  # <-- Change or extend as needed
+```
+
+The script will:
+1. Apply a Butterworth low-pass filter to each .npy file
+2. Process all files in parallel using multi-threading for acceleration
+3. Save the filtered results to new folders with the suffix '_filtered'
+
+Run the script:
+```bash
+python simid-dataset/filter_data.py
+```
+
+You will get a file architecture like this:
+
+~~~
+xrf55_for_simid/
+├──scene1_filtered/
+|   ├── 01_01_01.npy
+|   ├── 01_01_02.npy
+|   └── ...
+├──scene2_filtered/
+|   └── ...
+├──scene3_filtered/
+|   └── ...
+└──scene4_filtered/
+    └── ...
+~~~
+
+The script will output processing progress and a summary of successful/failed files at the end.
 
 ### 2.3 data seperation
 

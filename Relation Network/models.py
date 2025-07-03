@@ -2,8 +2,12 @@
 # 模型管理器，负责模型的初始化、权重初始化、优化器和调度器设置
 # Model manager, responsible for model initialization, weight initialization, optimizer and scheduler setup
 import math
+
 import torch
-import SEResNet, RelationNetworkWithResNet, ResNet
+
+import RelationNetworkWithResNet
+import SEResNet
+
 
 class ModelManager:
     """
