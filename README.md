@@ -184,9 +184,12 @@ Please follow the guide in `Relation Network/README.md`
 
 ### 3.3 Pretrained Checkpoints
 
-You can also use our pretrained checkpoints provided in [model path] instead of training by yourself.
+You can also use our pretrained checkpoints provided in https://drive.google.com/drive/folders/10zbW54rddU2gWswb3kkEfWYFfGhEJbpF?usp=sharing instead of training by yourself.
 
 ## 4 Test
+
+Please note: Since the testing is random, you may not be able to reproduce results that are exactly the same as those in the paper,
+but you should be able to achieve results that are fairly close.
 
 ### 4.1 Siamese Networks & Prototypical Network
 

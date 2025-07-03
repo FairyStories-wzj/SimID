@@ -80,5 +80,4 @@ class PrototypicalNetwork(nn.Module):
         # compute the distance (or similarity)
         dis = self.distance(query, prototypes, self.dis_f)
 
-        print(dis)
         return (-dis + 1e-8).log_softmax(dim=1)
