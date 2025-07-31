@@ -18,7 +18,7 @@ CHECKPOINT_PATH = "E:\\Python Project\\SimID\\models\\test"  # the place to save
 FIGURE_PATH = "E:\\Python Project\\SimID\\models\\test"  # the place to save the training curve figure
 
 # Network architecture
-DIS_F = 'L2'  # The similarity computation method, you can choose Sim/L2
+DIS_F = 'Sim'  # The similarity computation method, you can choose Sim/L2
 HEAD = 'SENet'  # The feature encoder, you can choose ResNet/DenseNet/SENet/SENet18
 
 # Hyperparameters
@@ -29,7 +29,7 @@ LR_DECAY = 0.8  # The factor that the learning rate decays exponentially
 LR_DECAY_EVERY = 100  # How often (in terms of training epochs) the learning rate decays
 LR_LIMIT = 1e-6  # The lower bound of the learning rate
 BATCH_SIZE = 128
-MAX_ITER = 2000  # max iteration for training
+MAX_ITER = 20000  # max iteration for training
 
 # Configs
 SHOW_EVERY = 1  # how often (in terms of training epochs) the training loss and elapsed time are displayed during training
