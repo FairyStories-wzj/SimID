@@ -33,7 +33,7 @@ MAX_ITER = 20000  # max iteration for training
 
 # Configs
 SHOW_EVERY = 1  # how often (in terms of training epochs) the training loss and elapsed time are displayed during training
-DRAW_EVERY = 100  # how often (in terms of training epochs) the training curve is sampled
+DRAW_EVERY = 10  # how often (in terms of training epochs) the training curve is sampled
 SAVE_EVERY = 100  # how often (in terms of training epochs) the checkpoint 'model-checkpoint-last.pt' is saved
 BACKUP_EVERY = 1000  # how often (in terms of training epochs) the checkpoint 'model-checkpoint-iterxxx.pt' is saved
 
@@ -157,3 +157,6 @@ for iter_id, (waves, labels) in enumerate(train_loader, last_iter + 1):
     time_start = time.time()
 
 print("average time：", np.mean(training_times))
+
+
+# D:\ANACONDA\envs\Prototypical-Network\Lib\site-packages\torch\lib
